@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import styles from './id.module.css'
 
 export default function Home() {
   const router = useRouter();
@@ -15,12 +16,23 @@ export default function Home() {
   }
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (id) {
+      fetchData();
+    }
+  }, [id]);
+
+  if (!blog) {
+    return <div>로딩중 입니다........</div>
+  }
 
   return (
-    <div>
-      {JSON.stringify(blog)}
+    <div className={styles.blog}>
+      <div className={styles.title}>{blog.title}</div>
+      <div className={styles.content}>{blog.content}</div>
+      <div className={styles.writerWrapper}>
+        <div className={styles.writer}>{blog.writer}</div>
+        <div className={styles.readtime}>readtime : {blog.readTime}</div>
+      </div>
     </div>
   )
 }

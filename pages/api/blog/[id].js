@@ -6,7 +6,7 @@ export default function handler(req, res) {
     const result = blogList.find((blog) => blog.id === id);
 
     if (result) {
-        res.json({ id: id, test: 'test' });
+        res.json(result);
     }
     else {
         res.send('no data');
