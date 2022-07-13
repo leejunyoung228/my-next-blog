@@ -1,5 +1,6 @@
-import { blogList } from "../../../database/blog"
+import { promisePool } from '../../../database/connection';
 
-export default function handler(req, res) {
-    res.json(blogList)
+export default async function handler(req, res) {
+    const [rows] = await promisePool.query(`SELECT * FROM Blog`);
+    res.json(rows);
 }

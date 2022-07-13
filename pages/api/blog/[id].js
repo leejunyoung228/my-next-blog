@@ -1,14 +1,12 @@
-import { blogList } from "../../../database/blog";
+import { promisePool } from '../../../database/connection';
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
     const id = Number(req.query.id);
 
-    const result = blogList.find((blog) => blog.id === id);
-
-    if (result) {
-        res.json(result);
-    }
-    else {
+    const [rows] = await promisePool.query(`SELECT * FROM Blog WHERE id=${id}`);
+    if (rows.length > 0) {
+        res.json(rows[0]);
+    } else {
         res.send('no data');
     }
 }
