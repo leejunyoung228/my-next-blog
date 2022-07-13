@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import styles from '../../styles/index.module.css'
+import styles from './index.module.css'
 
 export default function Home() {
   const [blogList, setBlogList] = useState([]);
